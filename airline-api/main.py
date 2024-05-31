@@ -39,15 +39,15 @@ for airline_name_str, flights_data in airline_dict.items():
         airlines[airline_name] = Airline(name=airline_name, flights= airline_flights)
    
 
-@app.get("/airlines")
+@app.get("/")
 async def list_airlines() -> list:
     return airlines.keys()
 
-@app.get("/{airline_name}/flight_number")
+@app.get("/{airline_name}")
 async def flight_numbers(airline_name: str) -> list:
     return [flight.flight_number for flight in airlines[airline_name].flights]
 
-@app.get("/{airline_name}/{flight_number}/flight")
+@app.get("/{airline_name}/{flight_number}")
 async def print_flight(airline_name: str, flight_number: str):
     for flight in airlines[airline_name].flights:
         if flight.flight_number == flight_number:
